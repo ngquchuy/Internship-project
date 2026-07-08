@@ -22,18 +22,17 @@ pre: " <b> 4. </b> "
 > * Việc liệt kê này giúp thể hiện rõ sự tham gia thực tế của bạn, cũng như các kỹ năng mềm và kinh nghiệm bạn đã tích lũy qua từng sự kiện.
 
 
-Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là nhứng món quà và những khoảnh khắc rất tuyệt vời.
+Trong quá trình thực tập, em đã tham gia 2 events. Mỗi event mang lại cho em những kiến thức, trải nghiệm và góc nhìn thực tế khác nhau về AWS, cloud computing, Generative AI cũng như hoạt động cộng đồng.
 
 ### [Event 1](4.1-Event1/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
 
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
+&emsp;**Tên sự kiện:** FCAJ Community Day
 
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
+&emsp;**Thời gian:** 09:00 AM - 12:00 PM, ngày 23/05/2026
 
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
+&emsp;**Địa điểm:** Floor 26, Bitexco Financial Tower
 
-
+&emsp;**Vai trò trong sự kiện:** Người tham dự
 
 ### [Event 2](4.2-Event2/)
 &emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
@@ -43,4 +42,5 @@ Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là
 &emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
 
 &emsp;**Vai trò trong sự kiện:** Người tham dự 
+
 
