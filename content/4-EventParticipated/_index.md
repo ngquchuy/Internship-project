@@ -35,12 +35,13 @@ During my internship, I participated in 2 events. Each event gave me different l
 
 ---
 
-### [Event 2](4.2-Event2/)  
-&emsp;**Event Name:** GenAI-powered App-DB Modernization workshop  
+### [Event 2](4.2-Event2/)
 
-&emsp;**Date & Time:** 09:00, August 13, 2025  
+&emsp;**Event name:** FCAJ Community Day
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
+&emsp;**Time:** 09:00 AM - 12:00 PM, June 27, 2026
 
-&emsp;**Role:** Attendee  
+&emsp;**Location:** Floor 26, Bitexco Financial Tower, 2 Hai Trieu Street, Saigon Ward, Ho Chi Minh City
+
+&emsp;**Role in the event:** Participant
 
