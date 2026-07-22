@@ -45,7 +45,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "https://ngquchuy.github.io/"
+            --baseURL "https://ngquchuy.github.io/Internship-project/"
 
       - name: Verify generated site
         run: |
