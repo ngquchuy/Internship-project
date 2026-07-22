@@ -1,33 +1,26 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-07-20
 weight: 5
 chapter: false
-pre: " <b> 5. </b> "
+pre: "<b>5. </b>"
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Workshop triển khai Serverless Video-on-Demand Platform on AWS
 
+## Tổng quan
 
-# Đảm bảo truy cập Hybrid an toàn đến S3 bằng cách sử dụng VPC endpoint
+Chương Workshop trình bày quy trình triển khai **Serverless Video-on-Demand Platform on AWS** theo từng bước. Nội dung được tổ chức theo cấu trúc hiện tại của dự án, bắt đầu từ phần tổng quan và chuẩn bị điều kiện tiên quyết, tiếp theo là xây dựng Backend, triển khai Video Processing Pipeline theo kiến trúc hướng sự kiện, kiểm thử hệ thống, tích hợp ứng dụng Web, tổng kết kết quả và thực hiện demo.
 
-#### Tổng quan
+Trong từng phần, Workshop mô tả các bước cấu hình, quá trình triển khai, các dịch vụ AWS được sử dụng và cách các thành phần trong hệ thống tương tác với nhau. Nội dung hướng đến việc cung cấp một quy trình triển khai có thể theo dõi và tái thực hiện để xây dựng, kiểm thử và đánh giá kiến trúc Serverless Video-on-Demand đã đề xuất.
 
-**AWS PrivateLink** cung cấp kết nối riêng tư đến các dịch vụ aws từ VPCs hoặc trung tâm dữ liệu (on-premise) mà không làm lộ lưu lượng truy cập ra ngoài public internet.
+## Nội dung
 
-Trong bài lab này, chúng ta sẽ học cách tạo, cấu hình, và kiểm tra VPC endpoints để cho phép workload của bạn tiếp cận các dịch vụ AWS mà không cần đi qua Internet công cộng.
-
-Chúng ta sẽ tạo hai loại endpoints để truy cập đến Amazon S3: gateway vpc endpoint và interface vpc endpoint. Hai loại vpc endpoints này mang đến nhiều lợi ích tùy thuộc vào việc bạn truy cập đến S3 từ môi trường cloud hay từ trung tâm dữ liệu (on-premise).
-+ **Gateway** - Tạo gateway endpoint để gửi lưu lượng đến Amazon S3 hoặc DynamoDB using private IP addresses. Bạn điều hướng lưu lượng từ VPC của bạn đến gateway endpoint bằng các bảng định tuyến (route tables)
-+ **Interface** - Tạo interface endpoint để gửi lưu lượng đến các dịch vụ điểm cuối (endpoints) sử dụng Network Load Balancer để phân phối lưu lượng. Lưu lượng dành cho dịch vụ điểm cuối được resolved bằng DNS.
-
-#### Nội dung
-
-1. [Tổng quan về workshop](5.1-Workshop-overview/)
-2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Truy cập đến S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập đến S3 từ TTDL On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (làm thêm)](5.5-Policy/)
-6. [Dọn dẹp tài nguyên](5.6-Cleanup/)
+1. [Tổng quan Workshop](5.1-Workshop-overview/)
+2. [Điều kiện tiên quyết](5.2-Prerequisite/)
+3. [Xây dựng Backend](5.3-Build-backend/)
+4. [Xây dựng Video Processing Pipeline](5.4-Build-video-processing-pipeline/)
+5. [Kiểm thử hệ thống](5.5-System-testing/)
+6. [Xây dựng ứng dụng Web](5.6-Web-application/)
+7. [Kết luận](5.7-Conclusion/)
+8. [Demo](5.8-Demo/)

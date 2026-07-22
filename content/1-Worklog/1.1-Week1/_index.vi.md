@@ -21,13 +21,13 @@ pre: " <b> 1.1. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
-| --- | --- | --- | --- |
-| 6 | Tham gia kickoff chương trình và tìm hiểu tổng quan về điện toán đám mây | 17/04/2026 | 17/04/2026 |
-| 2 | Tìm hiểu tổng quan về AWS, điểm khác biệt của AWS và hành trình bắt đầu lên mây | 20/04/2026 | 20/04/2026 |
-| 3 | Tìm hiểu hạ tầng toàn cầu của AWS và công cụ quản lý AWS Service | 21/04/2026 | 21/04/2026 |
-| 4 | Tạo tài khoản AWS Free Tier, thực hiện activity nhận credits và lab liên quan | 22/04/2026 | 22/04/2026 |
-| 5 | Tìm hiểu tối ưu hóa chi phí, AWS Budget, AWS Support và hoàn thiện ghi chú tuần 1 | 23/04/2026 | 23/04/2026 |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 6 | Tham gia kickoff chương trình và tìm hiểu tổng quan về điện toán đám mây | 17/04/2026 | 17/04/2026 | |
+| 2 | Tìm hiểu tổng quan về AWS, điểm khác biệt của AWS và hành trình bắt đầu lên mây | 20/04/2026 | 20/04/2026 | |
+| 3 | Tìm hiểu hạ tầng toàn cầu của AWS và công cụ quản lý AWS Service | 21/04/2026 | 21/04/2026 | |
+| 4 | Tạo tài khoản AWS Free Tier, thực hiện activity nhận credits và lab liên quan | 22/04/2026 | 22/04/2026 | <https://000001.awsstudygroup.com/> |
+| 5 | Tìm hiểu tối ưu hóa chi phí, AWS Budget, AWS Support và hoàn thiện ghi chú tuần 1 | 23/04/2026 | 23/04/2026 | <https://000007.awsstudygroup.com/><br><https://000009.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 1:
 

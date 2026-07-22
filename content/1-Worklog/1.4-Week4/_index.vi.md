@@ -25,13 +25,13 @@ pre: " <b> 1.4. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
-| --- | --- | --- | --- |
-| 6 | Tìm hiểu dịch vụ lưu trữ trên AWS, Amazon S3, storage class, access control và thực hành Lab13 về S3 bucket, backup plan, notification, restore | 08/05/2026 | 08/05/2026 |
-| 2 | Tìm hiểu VM Import/Export, S3 bucket ACL và thực hành Lab14 về import/export máy ảo giữa môi trường on-premises và AWS | 11/05/2026 | 11/05/2026 |
-| 3 | Tìm hiểu Storage Gateway, Snow Family, Glacier và thực hành Lab24 về File Storage Gateway, file shares, mount từ máy on-premises | 12/05/2026 | 12/05/2026 |
-| 4 | Tìm hiểu file storage trên AWS và thực hành Lab25 về FSx for Windows, Multi-AZ file system, hiệu năng, shadow copy, quota và mở rộng lưu trữ | 13/05/2026 | 13/05/2026 |
-| 5 | Tìm hiểu S3 Static Website, CORS, Object Key, Performance, CloudFront và thực hành Lab57 về static website, versioning, object copy, cleanup | 14/05/2026 | 14/05/2026 |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 6 | Tìm hiểu dịch vụ lưu trữ trên AWS, Amazon S3, storage class, access control và thực hành Lab13 về S3 bucket, backup plan, notification, restore | 08/05/2026 | 08/05/2026 | <https://000057.awsstudygroup.com/><br><https://000013.awsstudygroup.com/> |
+| 2 | Tìm hiểu VM Import/Export, S3 bucket ACL và thực hành Lab14 về import/export máy ảo giữa môi trường on-premises và AWS | 11/05/2026 | 11/05/2026 | <https://000014.awsstudygroup.com/> |
+| 3 | Tìm hiểu Storage Gateway, Snow Family, Glacier và thực hành Lab24 về File Storage Gateway, file shares, mount từ máy on-premises | 12/05/2026 | 12/05/2026 | <https://000024.awsstudygroup.com/> |
+| 4 | Tìm hiểu file storage trên AWS và thực hành Lab25 về FSx for Windows, Multi-AZ file system, hiệu năng, shadow copy, quota và mở rộng lưu trữ | 13/05/2026 | 13/05/2026 | <https://000025.awsstudygroup.com/> |
+| 5 | Tìm hiểu S3 Static Website, CORS, Object Key, Performance, CloudFront và thực hành Lab57 về static website, versioning, object copy, cleanup | 14/05/2026 | 14/05/2026 | <https://000057.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 4:
 

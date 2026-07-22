@@ -112,10 +112,9 @@ Bài viết giúp em có thêm góc nhìn khi thiết kế backend authenticatio
 AWS Database Blog:  
 https://aws.amazon.com/vi/blogs/database/user-authentication-and-session-management-with-amazon-aurora-dsql/
 
+AWS Study Group:  
+https://www.facebook.com/groups/awsstudygroupfcj/permalink/2205379233560370/
+
 ## Hình ảnh
 
 ![user authenticattion](/images/3-BlogsPosted/DBBLOG-5625-1.png)
-
-## Hashtags
-
-#AWS #AmazonAurora #AuroraDSQL #Backend #Database #IAM #Security #SessionManagement #CloudComputing #AWSStudyGroup

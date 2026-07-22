@@ -9,107 +9,120 @@ pre: " <b> 2. </b> "
 ⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
 {{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
+# Proposal
 
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+The demand for storing, processing, and streaming Video-on-Demand (VoD) media is growing rapidly across modern applications. However, building and maintaining traditional media processing infrastructure based on fixed servers often faces major challenges regarding high initial capital expenditure, rigid scaling limits, and idle server resources during off-peak hours. Meanwhile, video transcoding tasks exhibit intensive compute resource spikes over short durations immediately after new media files are uploaded.
 
-### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+To address the imbalance between utilization frequency and instantaneous resource demands, this proposal adopts an approach based on serverless computing and event-driven architecture on the Amazon Web Services (AWS) cloud platform. The project aims to design and implement a complete Serverless Video-on-Demand Platform on AWS, establishing a clear separation between direct user interaction tasks and background media processing pipelines. The system aims to provide secure upload flows, automated transcoding into HTTP Live Streaming (HLS) formats, optimized video playback user experiences, and centralized observability.
 
-### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+## Problem Statement
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+Within a Video-on-Demand platform, ingesting, processing, and delivering media files requires solving the following synchronized technical challenges:
 
-### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
+- **Large Video File Upload and Storage:** Raw video files are large and consume substantial bandwidth. Transmitting media through traditional application backends easily causes network congestion, temporary memory exhaustion, and increased connection drop rates.
+- **Compute-Intensive Transcoding Tasks:** Input media files need to be converted into HLS streaming formats with multiple resolutions and bitrates to ensure compatibility across diverse viewer devices. This process requires heavy compute capacity occurring in unpredictable bursts.
+- **High-Volume Content Delivery:** Streaming HLS video segments directly from origin storage can introduce high latency and prohibitive egress bandwidth costs without edge content delivery networking.
+- **Asynchronous Processing State Management:** Prolonged transcoding tasks require accurate status tracking (such as `UPLOADED`, `PROCESSING`, `READY`, `FAILED`) to provide UI feedback without blocking clients synchronously.
+- **Ensuring Availability, Observability, and Cost Controls:** The system must incorporate fault tolerance, incident message handling, and centralized operational logging without incurring fixed server management costs.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+## Proposed Solution
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+The proposal builds a comprehensive Serverless Video-on-Demand Platform on AWS solution by orchestrating specialized managed AWS services in a closed-loop processing workflow:
 
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+1. **User Authentication:** Users log in via Amazon Cognito User Pool to receive valid JWT tokens.
+2. **Business API Call:** Users issue requests to Amazon API Gateway; requests are authenticated automatically by Cognito JWT Authorizer before being routed to AWS Lambda.
+3. **Presigned URL Generation:** AWS Lambda generates an Amazon S3 presigned URL and returns it to the client application.
+4. **Direct Media Upload:** The user browser uses the presigned URL to upload raw video files directly into Amazon S3 Raw Upload Bucket, bypassing backend servers.
+5. **Event Emission and Routing:** New file uploads to S3 trigger `Object Created` events. These events are captured and filtered by Amazon EventBridge according to predefined event patterns.
+6. **Message Queuing:** EventBridge routes events to Amazon SQS queues to buffer messages and isolate asynchronous workloads.
+7. **Workflow Orchestration Initiation:** Amazon EventBridge Pipes reads messages from SQS, transforms input payloads, and triggers state machine execution on AWS Step Functions.
+8. **Transcoding Execution:** AWS Step Functions orchestrates the workflow and invokes AWS Elemental MediaConvert to transcode raw video into HLS packages (master playlist, variant playlists, media segments) and thumbnail images.
+9. **Transcoded Output Storage:** Completed HLS assets are written directly to Amazon S3 Processed Media Bucket.
+10. **Data and Status Update:** AWS Step Functions updates file metadata and HLS playback paths in Amazon DynamoDB tables.
+11. **High-Speed Content Delivery:** Users access and stream HLS videos via Amazon CloudFront CDN, protected by AWS WAF and Origin Access Control (OAC).
+12. **Centralized Observability:** Logs, performance metrics, and incident alarms from API Gateway, Lambda, SQS, Step Functions, and MediaConvert are collected centrally in Amazon CloudWatch.
 
-### 4. Technical Implementation
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+## Proposed Architecture
 
-### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+The system architecture is designed with clear layer decoupling to minimize inter-component dependencies, enabling individual services to scale independently based on actual demand. The strict separation between synchronous workflows (authentication, API calls, presigned URL generation) and asynchronous processing (event ingestion, message queuing, workflow orchestration, transcoding) improves overall system availability, facilitating testing, fault isolation, and operational monitoring.
 
-### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+![Proposed Architecture of Serverless Video-on-Demand Platform on AWS](/images/2-Proposal/VOD.drawio.png)  
+*Figure 2.1. Proposed Architecture of Serverless Video-on-Demand Platform on AWS.*
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
 
-Total: $0.7/month, $8.40/12 months
+## Architectural Description
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+The Serverless Video-on-Demand Platform on AWS architecture is organized into 7 functional layers:
 
-### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
+- **Identity & Access Layer:** Employs Amazon Cognito for user management, providing registration, login, and JWT token issuance to secure system resource access.
+- **Edge & Content Delivery Layer:** Consists of Amazon CloudFront integrated with AWS WAF and Amazon S3 Frontend Bucket. The web interface is hosted in a private S3 bucket. CloudFront delivers static web assets and HLS video streams to users with low latency, using Origin Access Control (OAC) to restrict direct Internet access to the S3 origin. AWS WAF attached to CloudFront filters malicious traffic and guards against application-layer attacks.
+- **Application Layer:** Comprises Amazon API Gateway and AWS Lambda functions. API Gateway handles HTTP/REST requests, verifies tokens via JWT Authorizer, and routes requests to Lambda. AWS Lambda executes short-lived business logic, such as S3 presigned URL generation and catalog retrieval.
+- **Data Layer:** Includes Amazon DynamoDB, Amazon S3 Raw Upload Bucket, and Amazon S3 Processed Media Bucket. DynamoDB stores movie metadata, user records, and video processing states. S3 Raw Upload Bucket stores uploaded source videos. S3 Processed Media Bucket stores output HLS assets and thumbnails.
+- **Event Processing Layer:** Encompasses Amazon EventBridge, Amazon SQS (with SQS Dead-Letter Queue), Amazon EventBridge Pipes, and AWS Step Functions. Upon file upload to S3 Raw Bucket, EventBridge routes event notifications to SQS queues for buffering. SQS handles load spikes and forwards failed messages to Dead-Letter Queue (DLQ). EventBridge Pipes polls SQS messages to trigger AWS Step Functions State Machine, which orchestrates execution steps and status updates.
+- **Media Processing Layer:** Utilizes AWS Elemental MediaConvert as the dedicated transcoding service. MediaConvert receives raw video files from S3 Raw Bucket upon Step Functions invocation, compresses and packages them into HLS playlists (.m3u8), video segments (.ts), and thumbnails (.jpg), outputting results to S3 Processed Media Bucket.
+- **Monitoring Layer:** Uses Amazon CloudWatch to centrally gather logs, metrics, and set up alarms across API Gateway, Lambda, SQS, Step Functions, and MediaConvert.
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+## Implementation Plan
 
-### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+The Serverless Video-on-Demand Platform on AWS implementation roadmap is structured into sequential phases:
+
+The initial phase focuses on refining system requirements, finalizing layered architecture, and selecting appropriate AWS managed services. Next, the team builds static web frontend interfaces, integrates Amazon Cognito user authentication, and sets up business APIs on Amazon API Gateway paired with AWS Lambda.
+
+The subsequent phase designs metadata structures on Amazon DynamoDB and implements S3 presigned URL generation enabling client applications to upload video files directly to Amazon S3 Raw Upload Bucket. Following upload workflow completion, efforts focus on asynchronous event-driven pipelines, including Amazon EventBridge event rules, Amazon SQS queues, Dead-Letter Queues, and Amazon EventBridge Pipes setup.
+
+In the media processing phase, the team designs AWS Step Functions orchestration workflows and configures AWS Elemental MediaConvert Job Templates generating multi-resolution HLS outputs and thumbnails. Transcoded outputs are stored in Amazon S3 Processed Media Bucket and configured for delivery through Amazon CloudFront CDN protected by Origin Access Control (OAC) and AWS WAF.
+
+The final phase establishes Amazon CloudWatch observability, conducts comprehensive end-to-end integration testing, evaluates real-world performance metrics and operational costs, finalizes report documentation, and prepares project demonstration scripts.
+
+
+## Estimated Costs
+
+Infrastructure Costs
+
+AWS Elemental MediaConvert: 22.50 USD/month (10 videos, 60 minutes each, HLS 1080p, 720p, and 480p outputs).
+
+Amazon S3 Standard: 1.60 USD/month (63 GB raw video storage, HLS content, thumbnails, and frontend).
+
+Amazon CloudFront and AWS WAF: 0.00 USD/month (under 100 GB data transfer out and under 1 million requests).
+
+Amazon Cognito: 0.00 USD/month (100 active users).
+
+Amazon API Gateway: 0.05 USD/month (50,000 requests).
+
+AWS Lambda: 0.00 USD/month (100,000 requests, 512 MB memory).
+
+Amazon DynamoDB: 0.05 USD/month (50,000 read and 10,000 write metadata requests).
+
+Amazon EventBridge: 0.00 USD/month (1,000 events).
+
+Amazon SQS and Dead-Letter Queue: 0.00 USD/month (under 1 million requests).
+
+Amazon EventBridge Pipes: 0.00 USD/month (1,000 messages).
+
+AWS Step Functions: 0.00 USD/month (10 workflows and under 4,000 state transitions).
+
+Amazon CloudWatch: 0.50 USD/month (1 GB logs, basic dashboard, and alarms).
+
+Total: 24.70 USD/month, 296.40 USD/12 months.
+
+
+## Expected Outcomes
+
+Based on the proposed architectural design, the Serverless Video-on-Demand Platform on AWS is expected to achieve the following technical outcomes:
+
+- Provide secure user authentication and authorization mechanisms via Cognito and JWT Authorizers.
+- Support direct client upload of large video files into S3 Raw Bucket using presigned URLs, reducing backend application load.
+- Fully automate raw video transcoding into multi-resolution HLS streaming assets and thumbnail generation.
+- Enable users to track asynchronous video processing states in real time based on DynamoDB updates.
+- Deliver HLS video streams with low latency and smooth playback across user browsers via CloudFront CDN.
+- Maintain comprehensive operational logging and early anomaly detection capabilities via CloudWatch.
+- Automatically scale system capacity in response to user traffic without manual administrative intervention.
+
+
+## Conclusion
+
+This proposal presented an architectural blueprint for a Serverless Video-on-Demand Platform on AWS to address infrastructure cost, scalability, and media processing performance challenges inherent in traditional server-based models. By combining AWS managed serverless services, the proposed architecture effectively decouples synchronous user interactions from asynchronous transcoding workflows, establishing a solid foundation for system development. This proposal serves as a key technical guide, directing detailed implementation, testing, and evaluation steps in subsequent project phases.

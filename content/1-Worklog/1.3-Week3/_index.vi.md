@@ -23,13 +23,13 @@ pre: " <b> 1.3. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
-| --- | --- | --- | --- |
-| 6 | Tìm hiểu dịch vụ Compute VM trên AWS, Amazon EC2, instance type, AMI, key pair và các thành phần cơ bản của EC2 | 01/05/2026 | 01/05/2026 |
-| 2 | Tìm hiểu EBS, instance store, backup trên EC2 và thực hành Lab13 về triển khai hạ tầng, backup plan | 04/05/2026 | 04/05/2026 |
-| 3 | Tìm hiểu user data, metadata, EC2 Auto Scaling, EFS, FSx, Lightsail, MGN và hoàn thiện kiểm tra/dọn dẹp Lab13 | 05/05/2026 | 05/05/2026 |
-| 4 | Thực hành Lab24 về S3 Bucket, EC2 cho Storage Gateway, tạo Storage Gateway và File Shares | 06/05/2026 | 06/05/2026 |
-| 5 | Thực hành Lab57 về static website trên S3, bucket versioning, di chuyển/sao chép object và tổng hợp kết quả tuần 3 | 07/05/2026 | 07/05/2026 |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 6 | Tìm hiểu dịch vụ Compute VM trên AWS, Amazon EC2, instance type, AMI, key pair và các thành phần cơ bản của EC2 | 01/05/2026 | 01/05/2026 | <https://000004.awsstudygroup.com/> |
+| 2 | Tìm hiểu EBS, instance store, backup trên EC2 và thực hành Lab13 về triển khai hạ tầng, backup plan | 04/05/2026 | 04/05/2026 | <https://000004.awsstudygroup.com/><br><https://000013.awsstudygroup.com/> |
+| 3 | Tìm hiểu user data, metadata, EC2 Auto Scaling, EFS, FSx, Lightsail, MGN và hoàn thiện kiểm tra/dọn dẹp Lab13 | 05/05/2026 | 05/05/2026 | <https://000004.awsstudygroup.com/> |
+| 4 | Thực hành Lab24 về S3 Bucket, EC2 cho Storage Gateway, tạo Storage Gateway và File Shares | 06/05/2026 | 06/05/2026 | <https://000024.awsstudygroup.com/> |
+| 5 | Thực hành Lab57 về static website trên S3, bucket versioning, di chuyển/sao chép object và tổng hợp kết quả tuần 3 | 07/05/2026 | 07/05/2026 | <https://000057.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 3:
 

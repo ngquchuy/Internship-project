@@ -25,13 +25,13 @@ chapter: false
 
 &emsp; **Class:** 22DTHG2
 
-&emsp; **Internship Company:** Amazon Web Services Viet Nam Company Limited
+&emsp; **Internship Company:** Amazon Web Services Viet Nam
 
 &emsp; **Internship Position:** Workforce Bootcamp - First Cloud AI Journey
 
-&emsp; **Internship Duration:** From 17/04/2026 to 06/07/2026
+&emsp; **Internship Duration:** From 17/04/2026 to 30/07/2026
 
-![Your profile picture](/images/avatar.png)
+![Your profile picture](/images/avatar.jpg)
 
 ### Report Content
 

@@ -12,48 +12,26 @@ pre: " <b> 1.10. </b> "
 
 ### Mục tiêu tuần 10:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Cấu hình Amazon S3 Event Notifications đẩy sự kiện Object Created sang Amazon EventBridge.
+* Triển khai Amazon SQS Queue và Dead-Letter Queue (DLQ) làm vùng đệm lưu trữ thông điệp xử lý video an toàn.
+* Cấu hình Amazon EventBridge Pipes để đọc thông điệp từ SQS và kích hoạt luồng xử lý.
+* Xây dựng luồng điều phối trạng thái tự động bằng AWS Step Functions State Machine.
+* Tích hợp toàn bộ pipeline tự động hóa từ S3 Upload đến chuyển mã MediaConvert và lưu dữ liệu HLS.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | -------------- |
+| 3 | - Cấu hình tính năng EventBridge Notification trên S3 Raw Upload Bucket <br> - Phân tích cấu hình định dạng cấu trúc tệp sự kiện payload khi có file video mới tải lên <br> - Xây dựng Event Pattern trên EventBridge Bus để lọc chính xác sự kiện theo Bucket name và đuôi file video <br> | 23/06/2026 | 23/06/2026 | |
+| 4 | - Khởi tạo hàng đợi Amazon SQS làm vùng đệm (Buffer Queue) cho pipeline xử lý video <br> - Cấu hình thông số Visibility Timeout, Message Retention Period, Long Polling và Retry Policy <br> - Thiết lập hàng đợi sự cố Dead-Letter Queue (DLQ) cùng Redrive Policy để hứng các thông điệp lỗi <br> | 24/06/2026 | 24/06/2026 | |
+| 5 | - Cấu hình Amazon EventBridge Pipes làm cầu nối tích hợp dịch vụ không dùng code <br> - Cấu hình SQS Queue làm Source và AWS Step Functions State Machine làm Target <br> - Thiết lập các tiêu chí Filter và biến đổi cấu trúc định dạng Input Transformation cho thông điệp <br> | 25/06/2026 | 25/06/2026 | |
+| 6 | - Thiết kế và xây dựng quy trình làm việc tự động với AWS Step Functions (State Machine) <br> - Định nghĩa các bước ASL: Kiểm tra dữ liệu đầu vào -> Cập nhật trạng thái DynamoDB (PROCESSING) -> Khởi chạy MediaConvert Job -> Kiểm tra trạng thái hoàn tất -> Cập nhật (READY/FAILED) <br> - Triển khai cơ chế Retry, Catch exception và xử lý sự cố idempotent <br> | 26/06/2026 | 26/06/2026 | |
+| 2 | - Kết nối tích hợp toàn bộ luồng Pipeline xử lý video tự động End-to-End <br> - Thực hiện Upload file video MP4 -> S3 kích hoạt EventBridge -> SQS nhận message -> EventBridge Pipe gọi Step Functions -> MediaConvert tạo HLS -> Ghi dữ liệu vào S3 Processed -> Cập nhật DynamoDB <br> - Thử nghiệm tải file hỏng để kiểm tra cơ chế đẩy message lỗi vào SQS DLQ <br> | 29/06/2026 | 29/06/2026 | |
 
 
 ### Kết quả đạt được tuần 10:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Thiết lập thành công cơ chế đẩy sự kiện tự động từ Amazon S3 sang Amazon EventBridge.
+* Xây dựng hệ thống hàng đợi Amazon SQS kết hợp Dead-Letter Queue (DLQ) đảm bảo không mất mát thông điệp.
+* Cấu hình Amazon EventBridge Pipes kết nối tin cậy giữa hàng đợi SQS và luồng điều phối Step Functions.
+* Xây dựng sơ đồ quy trình tự động trên AWS Step Functions kiểm soát toàn bộ vòng đời chuyển mã video.
+* Hoàn thành tích hợp Pipeline xử lý video tự động từ khâu tải lên S3 Raw đến chuyển mã HLS và cập nhật cơ sở dữ liệu.

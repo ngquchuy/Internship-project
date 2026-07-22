@@ -112,10 +112,9 @@ This article gave me a better perspective on designing backend authentication fo
 AWS Database Blog:  
 https://aws.amazon.com/vi/blogs/database/user-authentication-and-session-management-with-amazon-aurora-dsql/
 
+AWS Study Group:  
+https://www.facebook.com/groups/awsstudygroupfcj/permalink/2205379233560370/
+
 ## Image
 
-*Add the architecture image or screenshot of my blog post here.*
-
-## Hashtags
-
-#AWS #AmazonAurora #AuroraDSQL #Backend #Database #IAM #Security #SessionManagement #CloudComputing #AWSStudyGroup
+![user authenticattion](/images/3-BlogsPosted/DBBLOG-5625-1.png)

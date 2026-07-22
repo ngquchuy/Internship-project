@@ -25,13 +25,13 @@ pre: " <b> 1.6. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
-| --- | --- | --- | --- |
-| 6 | Tìm hiểu Database Concepts, RDS, Aurora, Redshift, ElastiCache và thực hành Lab05 về RDS, application deployment, backup/restore | 22/05/2026 | 22/05/2026 |
-| 2 | Thực hành Lab43 về database migration, schema conversion, migration task, endpoint, serverless migration và troubleshooting | 25/05/2026 | 25/05/2026 |
-| 3 | Tìm hiểu DynamoDB và thực hành Lab39, Lab40 về DynamoDB, backup, design patterns, database table, cost, tagging và query | 26/05/2026 | 26/05/2026 |
-| 4 | Thực hành Lab35, Lab60 và Lab70 về S3, delivery stream, Glue Crawler, Athena, QuickSight, CloudShell, SDK, Cloud9 và DataBrew | 27/05/2026 | 27/05/2026 |
-| 5 | Thực hành Lab72, Lab73 về data pipeline, Glue, EMR, Athena, Kinesis Data Analytics, Lambda, Redshift, QuickSight dashboard và tổng hợp tuần 6 | 28/05/2026 | 28/05/2026 |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 6 | Tìm hiểu Database Concepts, RDS, Aurora, Redshift, ElastiCache và thực hành Lab05 về RDS, application deployment, backup/restore | 22/05/2026 | 22/05/2026 | <https://000005.awsstudygroup.com/> |
+| 2 | Thực hành Lab43 về database migration, schema conversion, migration task, endpoint, serverless migration và troubleshooting | 25/05/2026 | 25/05/2026 | <https://000043.awsstudygroup.com/> |
+| 3 | Tìm hiểu DynamoDB và thực hành Lab39, Lab40 về DynamoDB, backup, design patterns, database table, cost, tagging và query | 26/05/2026 | 26/05/2026 | <https://000039.awsstudygroup.com/><br><https://000040.awsstudygroup.com/> |
+| 4 | Thực hành Lab35, Lab60 và Lab70 về S3, delivery stream, Glue Crawler, Athena, QuickSight, CloudShell, SDK, Cloud9 và DataBrew | 27/05/2026 | 27/05/2026 | <https://000035.awsstudygroup.com/><br><https://000070.awsstudygroup.com/> |
+| 5 | Thực hành Lab72, Lab73 về data pipeline, Glue, EMR, Athena, Kinesis Data Analytics, Lambda, Redshift, QuickSight dashboard và tổng hợp tuần 6 | 28/05/2026 | 28/05/2026 | <https://000072.awsstudygroup.com/><br><https://000073.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 6:
 

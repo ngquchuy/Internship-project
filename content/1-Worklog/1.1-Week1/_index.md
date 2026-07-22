@@ -21,13 +21,13 @@ pre: " <b> 1.1. </b> "
 
 ### Tasks to be carried out this week:
 
-| Day | Task | Start Date | Completion Date |
-| --- | --- | --- | --- |
-| Friday | Attend kickoff program and learn about cloud computing overview | 17/04/2026 | 17/04/2026 |
-| Monday | Learn about AWS overview, key differentiators of AWS, and cloud journey path | 20/04/2026 | 20/04/2026 |
-| Tuesday | Learn about AWS global infrastructure and AWS Management Console tools | 21/04/2026 | 21/04/2026 |
-| Wednesday | Create AWS Free Tier account, complete credit-claiming activities and related labs | 22/04/2026 | 22/04/2026 |
-| Thursday | Learn about cost optimization, AWS Budgets, AWS Support, and finalize Week 1 notes | 23/04/2026 | 23/04/2026 |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 6 | Attend program kickoff and learn about cloud computing overview | 17/04/2026 | 17/04/2026 | |
+| 2 | Learn about AWS overview, key differentiators of AWS, and cloud journey path | 20/04/2026 | 20/04/2026 | |
+| 3 | Learn about AWS global infrastructure and AWS Management Console tools | 21/04/2026 | 21/04/2026 | |
+| 4 | Create AWS Free Tier account, complete credit-claiming activities and related labs | 22/04/2026 | 22/04/2026 | <https://000001.awsstudygroup.com/> |
+| 5 | Learn about cost optimization, AWS Budgets, AWS Support, and finalize Week 1 notes | 23/04/2026 | 23/04/2026 | <https://000007.awsstudygroup.com/><br><https://000009.awsstudygroup.com/> |
 
 ### Week 1 Achievements:
 

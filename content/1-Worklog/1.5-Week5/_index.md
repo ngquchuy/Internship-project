@@ -12,90 +12,90 @@ pre: " <b> 1.5. </b> "
 
 ### Week 5 Objectives:
 
-- Learn about AWS security services and the Shared Responsibility Model between AWS and users.
-- Grasp the role of IAM in identity management, permissions, and access control.
+- Learn about security services on AWS and the Shared Responsibility Model between AWS and users.
+- Grasp the role of IAM in identity management, authorization, and access control.
 - Learn about Amazon Cognito, AWS Organizations, AWS Identity Center, KMS, and Security Hub.
-- Practice enabling Security Hub and checking assessment scores against security standard frameworks.
-- Practice managing tags, resource groups, and using tags with the AWS CLI.
-- Practice creating IAM users, policies, roles, switch roles, and verifying access permissions.
-- Practice limiting IAM user permissions using restriction policies.
-- Practice encrypting data using KMS, storing it in S3, logging with CloudTrail, and querying logs using Athena.
-- Practice restricting switch role operations by IP address and time.
-- Practice comparing the usage of access keys and IAM roles in accessing AWS resources.
-- Know how to verify results and clean up resources after labs.
+- Practice enabling Security Hub and checking assessment scores against security standard suites.
+- Practice managing tags, resource groups, and using tags with AWS CLI.
+- Practice creating IAM users, policies, roles, switching roles, and checking access permissions.
+- Practice limiting IAM user rights with restriction policies.
+- Practice data encryption at rest with KMS, storing on S3, logging with CloudTrail, and querying logs with Athena.
+- Practice limiting switch role by IP and time.
+- Practice comparing the use of access keys versus IAM roles in accessing AWS resources.
+- Know how to verify results and clean up resources after completing labs.
 
 ### Tasks to be carried out this week:
 
-| Day | Task | Start Date | Completion Date |
-| --- | --- | --- | --- |
-| Friday | Learn about Shared Responsibility Model, IAM, Cognito, Organizations, Identity Center, KMS, Security Hub, and practice Lab18 | 15/05/2026 | 15/05/2026 |
-| Monday | Practice Lab22 on optimizing EC2 costs using Lambda, Slack webhooks, instance tagging, starting/stopping EC2, and verifying results | 18/05/2026 | 18/05/2026 |
-| Tuesday | Practice Lab27 and Lab28 on tag management, resource groups, IAM users, policies, roles, switch roles, and policy checking | 19/05/2026 | 19/05/2026 |
-| Wednesday | Practice Lab30 and Lab33 on restriction policies, IAM limited users, KMS, S3, CloudTrail, Athena, and encrypted data | 20/05/2026 | 20/05/2026 |
-| Thursday | Practice Lab44 and Lab48 on IAM groups, users, permissions, admin roles, switch roles, access keys, IAM roles, and summarize Week 5 | 21/05/2026 | 21/05/2026 |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 6 | Learn about Shared Responsibility Model, IAM, Cognito, Organizations, Identity Center, KMS, Security Hub, and practice Lab18 | 15/05/2026 | 15/05/2026 | <https://000018.awsstudygroup.com/> |
+| 2 | Practice Lab22 on optimizing EC2 costs with Lambda, Slack webhooks, instance tags, starting/stopping EC2, and checking results | 18/05/2026 | 18/05/2026 | <https://000022.awsstudygroup.com/> |
+| 3 | Practice Lab27 and Lab28 on managing tags, resource groups, IAM users, policies, roles, switching roles, and policy checks | 19/05/2026 | 19/05/2026 | <https://000027.awsstudygroup.com/><br><https://000028.awsstudygroup.com/> |
+| 4 | Practice Lab30 and Lab33 on restriction policies, IAM limited users, KMS, S3, CloudTrail, Athena, and encrypted data | 20/05/2026 | 20/05/2026 | <https://000030.awsstudygroup.com/><br><https://000033.awsstudygroup.com/> |
+| 5 | Practice Lab44 and Lab48 on IAM groups, users, permissions, admin roles, switching roles, access keys, IAM roles, and summarize Week 5 | 21/05/2026 | 21/05/2026 | <https://000044.awsstudygroup.com/><br><https://000048.awsstudygroup.com/> |
 
 ### Week 5 Achievements:
 
-- Understood the Shared Responsibility Model in AWS security.
+- Grasped the Shared Responsibility Model in AWS security.
 - Differentiated security responsibilities belonging to AWS versus those belonging to the user.
-- Understood the role of IAM in identity management and access control on AWS.
-- Understood major IAM components, including users, groups, policies, and roles.
-- Understood the role of Amazon Cognito in managing user authentication for applications.
-- Understood the role of AWS Organizations in managing multiple AWS accounts.
-- Understood the role of AWS Identity Center in centralized access management.
-- Understood the role of AWS Key Management Service (KMS) in managing encryption keys.
-- Understood the role of AWS Security Hub in consolidating and evaluating security status.
-- Enabled AWS Security Hub according to Lab18 instructions.
-- Checked evaluation scores based on security standard frameworks within Security Hub.
+- Grasped the role of IAM in identity management and access authorization on AWS.
+- Understood main IAM components such as users, groups, policies, and roles.
+- Grasped the role of Amazon Cognito in managing user authentication for applications.
+- Grasped the role of AWS Organizations in managing multiple AWS accounts.
+- Grasped the role of AWS Identity Center in centralized access management.
+- Grasped the role of AWS Key Management Service (KMS) in managing encryption keys.
+- Grasped the role of AWS Security Hub in aggregating and assessing security posture.
+- Enabled AWS Security Hub according to Lab18 content.
+- Verified assessment scores per security standard suite in Security Hub.
 - Cleaned up resources after Lab18.
-- Created VPC, Security Group, and EC2 instances required for Lab22.
-- Configured Slack Incoming Webhooks to receive notifications as specified.
+- Created VPCs, Security Groups, and EC2 instances serving Lab22.
+- Configured Incoming Slack Webhooks to receive notifications per lab content.
 - Created tags for EC2 instances.
-- Created an IAM role for Lambda.
-- Created a Lambda function to stop EC2 instances.
-- Created a Lambda function to start EC2 instances.
-- Verified EC2 instance start/stop operations after triggering Lambda functions.
+- Created IAM roles for Lambda functions.
+- Created Lambda functions to stop EC2 instances.
+- Created Lambda functions to start EC2 instances.
+- Verified instance start/stop results after running Lambda functions.
 - Cleaned up resources after Lab22.
-- Created tagged EC2 instances according to Lab27.
-- Managed tags within AWS Resources.
-- Filtered resources by tags.
-- Used tags with the AWS CLI.
+- Created tagged EC2 instances according to Lab27 content.
+- Managed tags in AWS Resources.
+- Filtered resources by tag.
+- Used tags with AWS CLI.
 - Created Resource Groups based on tags.
 - Cleaned up resources after Lab27.
-- Created IAM users according to Lab28.
+- Created IAM users according to Lab28 content.
 - Created IAM Policies to control access permissions.
 - Created IAM Roles and performed Switch Roles.
-- Verified EC2 console access across different regions.
-- Tested EC2 instance creation when required tags are missing.
-- Edited resource tags on EC2 instances.
+- Verified access permissions in EC2 console across different regions.
+- Verified EC2 instance creation scenarios without matching tags.
+- Modified Resource Tags on EC2 instances.
 - Performed Policy Checks to verify access policies.
 - Cleaned up resources after Lab28.
-- Created Restriction Policies according to Lab30.
+- Created Restriction Policies according to Lab30 content.
 - Created IAM Limited Users.
-- Verified access limitations on IAM Users after applying policies.
+- Verified permission boundaries of IAM Users after applying policies.
 - Cleaned up resources after Lab30.
-- Created Policies and Roles required for Lab33.
-- Created Groups and Users for security lab tasks.
-- Created Key Management Service (KMS) keys.
-- Created S3 buckets and uploaded data.
+- Created Policies and Roles as required by Lab33.
+- Created Groups and Users serving security lab requirements.
+- Created Key Management Service keys.
+- Created S3 buckets and uploaded data to S3.
 - Created CloudTrail to record account activities.
-- Verified logs captured in CloudTrail.
-- Created Amazon Athena to query activity logs.
-- Queried data using Athena according to lab steps.
-- Inspected and shared encrypted data on S3.
+- Verified logs recorded in CloudTrail.
+- Created Amazon Athena to query log data.
+- Queried data with Athena according to lab content.
+- Verified and shared encrypted data on S3.
 - Cleaned up resources after Lab33.
-- Created IAM Groups according to Lab44.
+- Created IAM Groups according to Lab44 content.
 - Created IAM Users and verified permissions.
 - Created Admin IAM Roles.
 - Configured Switch Roles.
-- Restricted Switch Role functionality by IP address.
-- Restricted Switch Role functionality by time.
+- Restricted Switch Roles by IP address.
+- Restricted Switch Roles by time window.
 - Cleaned up resources after Lab44.
-- Created EC2 instances and S3 buckets required for Lab48.
+- Created EC2 instances and S3 buckets serving Lab48.
 - Created IAM users and access keys.
-- Used access keys to access AWS resources as specified.
-- Created IAM roles and used them to access AWS resources.
-- Differentiated access key and IAM role usages in practical resource access scenarios.
+- Used access keys to access AWS resources per lab content.
+- Created IAM roles and used IAM roles to access AWS resources.
+- Differentiated the use of access keys versus IAM roles in resource access practice.
 - Cleaned up resources after Lab48.
-- Successfully completed the main labs for Week 5, including Lab18, Lab22, Lab27, Lab28, Lab30, Lab33, Lab44, and Lab48.
-- Developed a habit of verifying access permissions, assessing security risks, and cleaning up resources after practice.
+- Completed major labs in Week 5 including Lab18, Lab22, Lab27, Lab28, Lab30, Lab33, Lab44, and Lab48.
+- Developed a habit of checking access permissions, assessing security risks, and cleaning up resources after practice.

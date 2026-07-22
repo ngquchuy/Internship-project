@@ -26,13 +26,13 @@ pre: " <b> 1.5. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
-| --- | --- | --- | --- |
-| 6 | Tìm hiểu Shared Responsibility Model, IAM, Cognito, Organizations, Identity Center, KMS, Security Hub và thực hành Lab18 | 15/05/2026 | 15/05/2026 |
-| 2 | Thực hành Lab22 về tối ưu chi phí EC2 với Lambda, Slack webhook, tag instance, start/stop EC2 và kiểm tra kết quả | 18/05/2026 | 18/05/2026 |
-| 3 | Thực hành Lab27 và Lab28 về quản lý tag, resource group, IAM user, policy, role, switch role và kiểm tra policy | 19/05/2026 | 19/05/2026 |
-| 4 | Thực hành Lab30 và Lab33 về restriction policy, IAM limited user, KMS, S3, CloudTrail, Athena và dữ liệu mã hóa | 20/05/2026 | 20/05/2026 |
-| 5 | Thực hành Lab44 và Lab48 về IAM group, users, permissions, admin role, switch role, access key, IAM role và tổng hợp tuần 5 | 21/05/2026 | 21/05/2026 |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 6 | Tìm hiểu Shared Responsibility Model, IAM, Cognito, Organizations, Identity Center, KMS, Security Hub và thực hành Lab18 | 15/05/2026 | 15/05/2026 | <https://000018.awsstudygroup.com/> |
+| 2 | Thực hành Lab22 về tối ưu chi phí EC2 với Lambda, Slack webhook, tag instance, start/stop EC2 và kiểm tra kết quả | 18/05/2026 | 18/05/2026 | <https://000022.awsstudygroup.com/> |
+| 3 | Thực hành Lab27 và Lab28 về quản lý tag, resource group, IAM user, policy, role, switch role và kiểm tra policy | 19/05/2026 | 19/05/2026 | <https://000027.awsstudygroup.com/><br><https://000028.awsstudygroup.com/> |
+| 4 | Thực hành Lab30 và Lab33 về restriction policy, IAM limited user, KMS, S3, CloudTrail, Athena và dữ liệu mã hóa | 20/05/2026 | 20/05/2026 | <https://000030.awsstudygroup.com/><br><https://000033.awsstudygroup.com/> |
+| 5 | Thực hành Lab44 và Lab48 về IAM group, users, permissions, admin role, switch role, access key, IAM role và tổng hợp tuần 5 | 21/05/2026 | 21/05/2026 | <https://000044.awsstudygroup.com/><br><https://000048.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 5:
 

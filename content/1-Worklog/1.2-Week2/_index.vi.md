@@ -22,13 +22,13 @@ pre: " <b> 1.2. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
-| --- | --- | --- | --- |
-| 6 | Tìm hiểu Amazon VPC, subnet, route table, Internet Gateway và thực hành phần đầu Lab03 | 24/04/2026 | 24/04/2026 |
-| 2 | Tìm hiểu VPC Security, NAT Gateway, Security Group, Network ACL và hoàn thành Lab03 | 27/04/2026 | 27/04/2026 |
-| 3 | Tìm hiểu Hybrid DNS, VPN/Direct Connect ở mức khái niệm và thực hành Lab10 với Route 53 Resolver | 28/04/2026 | 28/04/2026 |
-| 4 | Tìm hiểu Multi-VPC features và thực hành Lab19 với VPC Peering, route table, NACL và Cross-Peer DNS | 29/04/2026 | 29/04/2026 |
-| 5 | Tìm hiểu Transit Gateway, Load Balancer/extra resources ở mức tổng quan và thực hành Lab20 | 30/04/2026 | 30/04/2026 |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 6 | Tìm hiểu Amazon VPC, subnet, route table, Internet Gateway và thực hành phần đầu Lab03 | 24/04/2026 | 24/04/2026 | <https://000003.awsstudygroup.com/> |
+| 2 | Tìm hiểu VPC Security, NAT Gateway, Security Group, Network ACL và hoàn thành Lab03 | 27/04/2026 | 27/04/2026 | <https://000003.awsstudygroup.com/> |
+| 3 | Tìm hiểu Hybrid DNS, VPN/Direct Connect ở mức khái niệm và thực hành Lab10 với Route 53 Resolver | 28/04/2026 | 28/04/2026 | <https://000003.awsstudygroup.com/> |
+| 4 | Tìm hiểu Multi-VPC features và thực hành Lab19 với VPC Peering, route table, NACL và Cross-Peer DNS | 29/04/2026 | 29/04/2026 | <https://000003.awsstudygroup.com/> |
+| 5 | Tìm hiểu Transit Gateway, Load Balancer/extra resources ở mức tổng quan và thực hành Lab20 | 30/04/2026 | 30/04/2026 | <https://000003.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 2:
 

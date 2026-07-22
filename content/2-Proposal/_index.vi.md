@@ -9,100 +9,120 @@ pre: " <b> 2. </b> "
 ⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
 {{% /notice %}}
 
-Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
+# Bản đề xuất
 
-# IoT Weather Platform for Lab Research  
-## Giải pháp AWS Serverless hợp nhất cho giám sát thời tiết thời gian thực  
+Nhu cầu lưu trữ, xử lý và phát trực tuyến video dạng Video-on-Demand (VoD) đang tăng trưởng nhanh chóng trong nhiều ứng dụng hiện đại. Tuy nhiên, việc xây dựng và duy trì hạ tầng xử lý truyền thông truyền thống dựa trên máy chủ cố định thường đối mặt với thách thức lớn về chi phí đầu tư ban đầu, khả năng mở rộng không linh hoạt và tài nguyên máy chủ thường xuyên rơi vào trạng thái nhàn rỗi ngoài giờ cao điểm. Trong khi đó, tác vụ chuyển mã video (transcoding) lại có đặc thù tiêu tốn tài nguyên tính toán rất lớn trong một khoảng thời gian ngắn ngay khi tệp tin mới được tải lên.
 
-### 1. Tóm tắt điều hành  
-IoT Weather Platform được thiết kế dành cho nhóm *ITea Lab* tại TP. Hồ Chí Minh nhằm nâng cao khả năng thu thập và phân tích dữ liệu thời tiết. Nền tảng hỗ trợ tối đa 5 trạm thời tiết, có khả năng mở rộng lên 10–15 trạm, sử dụng thiết bị biên Raspberry Pi kết hợp cảm biến ESP32 để truyền dữ liệu qua MQTT. Nền tảng tận dụng các dịch vụ AWS Serverless để cung cấp giám sát thời gian thực, phân tích dự đoán và tiết kiệm chi phí, với quyền truy cập giới hạn cho 5 thành viên phòng lab thông qua Amazon Cognito.  
+Để giải quyết sự không cân bằng giữa tần suất sử dụng và nhu cầu tài nguyên tức thời, đề xuất này chọn hướng tiếp cận dựa trên mô hình serverless và kiến trúc dựa trên sự kiện (event-driven architecture) trên nền tảng điện toán đám mây Amazon Web Services (AWS). Đề án nhằm mục tiêu thiết kế và triển khai một hệ thống Serverless Video-on-Demand Platform on AWS hoàn chỉnh, phân tách rõ ràng giữa các tác vụ tương tác trực tiếp với người dùng và các quy trình xử lý phương tiện ngầm bối cảnh. Hệ thống hướng đến việc cung cấp luồng tải lên an toàn, tự động hóa toàn bộ quá trình chuyển mã sang định dạng HTTP Live Streaming (HLS), tối ưu hóa trải nghiệm phát lại video và thiết lập cơ chế giám sát tập trung.
 
-### 2. Tuyên bố vấn đề  
-*Vấn đề hiện tại*  
-Các trạm thời tiết hiện tại yêu cầu thu thập dữ liệu thủ công, khó quản lý khi có nhiều trạm. Không có hệ thống tập trung cho dữ liệu hoặc phân tích thời gian thực, và các nền tảng bên thứ ba thường tốn kém và quá phức tạp.  
 
-*Giải pháp*  
-Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS Lambda và API Gateway để xử lý, Amazon S3 để lưu trữ (bao gồm data lake), và AWS Glue Crawlers cùng các tác vụ ETL để trích xuất, chuyển đổi, tải dữ liệu từ S3 data lake sang một S3 bucket khác để phân tích. AWS Amplify với Next.js cung cấp giao diện web, và Amazon Cognito đảm bảo quyền truy cập an toàn. Tương tự như Thingsboard và CoreIoT, người dùng có thể đăng ký thiết bị mới và quản lý kết nối, nhưng nền tảng này hoạt động ở quy mô nhỏ hơn và phục vụ mục đích sử dụng nội bộ. Các tính năng chính bao gồm bảng điều khiển thời gian thực, phân tích xu hướng và chi phí vận hành thấp.  
+## Bài toán đặt ra
 
-*Lợi ích và hoàn vốn đầu tư (ROI)*  
-Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.  
+Trong khuôn khổ hệ thống Video-on-Demand, việc tiếp nhận, xử lý và phân phối tệp tin truyền thông đòi hỏi phải giải quyết đồng bộ các vấn đề kỹ thuật sau:
 
-### 3. Kiến trúc giải pháp  
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.  
+- **Tải lên và lưu trữ tệp video dung lượng lớn:** Tệp video gốc thường có dung lượng lớn và chiếm nhiều băng thông. Việc truyền dữ liệu thông qua các máy chủ backend thông thường dễ gây nghẽn mạng, tiêu tốn bộ nhớ tạm và tăng nguy cơ thất bại khi kết nối gián đoạn.
+- **Tác vụ chuyển mã tiêu tốn tài nguyên tính toán:** Tệp tin video đầu vào cần được chuyển đổi sang định dạng HLS kèm theo nhiều mức độ phân giải và tốc độ bit khác nhau nhằm tương thích với đa dạng thiết bị người dùng. Quá trình này đòi hỏi năng lực xử lý cao nhưng chỉ diễn ra theo từng đợt bất định.
+- **Phân phối nội dung đến số lượng lớn người dùng:** Việc phát trực tiếp các phân đoạn video từ lưu trữ gốc có thể sinh ra độ trễ cao và chi phí băng thông lớn nếu không có giải pháp mạng phân phối nội dung ở lớp biên.
+- **Quản lý trạng thái xử lý bất đồng bộ:** Tác vụ chuyển mã kéo dài cần có cơ chế theo dõi trạng thái chính xác (như `UPLOADED`, `PROCESSING`, `READY`, `FAILED`) để phản hồi cho giao diện người dùng mà không bắt ứng dụng khách phải chờ đợi theo cơ chế đồng bộ.
+- **Bảo đảm tính sẵn sàng, khả năng quan sát và kiểm soát chi phí:** Hệ thống cần có cơ chế chịu lỗi, xử lý thông điệp sự cố và theo dõi nhật ký vận hành tập trung mà không làm gia tăng chi phí vận hành máy chủ cố định.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+## Giải pháp đề xuất
 
-*Dịch vụ AWS sử dụng*  
-- *AWS IoT Core*: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.  
-- *AWS Lambda*: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).  
-- *Amazon API Gateway*: Giao tiếp với ứng dụng web.  
-- *Amazon S3*: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).  
-- *AWS Glue*: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.  
-- *AWS Amplify*: Lưu trữ giao diện web Next.js.  
-- *Amazon Cognito*: Quản lý quyền truy cập cho người dùng phòng lab.  
+Đề xuất xây dựng giải pháp tổng thể Serverless Video-on-Demand Platform on AWS bằng cách kết hợp các dịch vụ được quản lý chuyên biệt của AWS theo một luồng xử lý khép kín:
 
-*Thiết kế thành phần*  
-- *Thiết bị biên*: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.  
-- *Tiếp nhận dữ liệu*: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.  
-- *Lưu trữ dữ liệu*: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.  
-- *Xử lý dữ liệu*: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.  
-- *Giao diện web*: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.  
-- *Quản lý người dùng*: Amazon Cognito giới hạn 5 tài khoản hoạt động.  
+1. **Xác thực người dùng:** Người dùng thực hiện đăng nhập thông qua Amazon Cognito User Pool để nhận mã xác thực JWT Token hợp lệ.
+2. **Gọi API nghiệp vụ:** Người dùng gửi yêu cầu đến Amazon API Gateway; yêu cầu được xác thực tự động bởi Cognito JWT Authorizer trước khi chuyển cho AWS Lambda xử lý.
+3. **Tạo presigned URL:** Hàm AWS Lambda khởi tạo một presigned URL của Amazon S3 và trả về cho ứng dụng khách.
+4. **Tải lên trực tiếp:** Trình duyệt người dùng sử dụng presigned URL để tải trực tiếp tệp video gốc vào Amazon S3 Raw Upload Bucket mà không đi qua máy chủ ứng dụng.
+5. **Phát sinh và định tuyến sự kiện:** Tệp video mới tải lên S3 kích hoạt sự kiện `Object Created`. Sự kiện này được Amazon EventBridge tiếp nhận và lọc theo đúng pattern quy định.
+6. **Đưa thông điệp vào hàng đợi:** EventBridge chuyển sự kiện đến hàng đợi Amazon SQS nhằm làm đệm lưu trữ thông điệp và cách ly tải bất đồng bộ.
+7. **Khởi chạy luồng điều phối:** Amazon EventBridge Pipes đọc thông điệp từ SQS, thực hiện biến đổi dữ liệu đầu vào và kích hoạt quy trình làm việc trên AWS Step Functions.
+8. **Thực hiện chuyển mã:** AWS Step Functions điều phối quy trình và gọi dịch vụ AWS Elemental MediaConvert để thực hiện chuyển mã video gốc thành bộ tệp HLS (bao gồm master playlist, variant playlists và các phân đoạn segment) cùng hình ảnh thumbnail.
+9. **Lưu trữ kết quả chuyển mã:** Bộ tệp HLS hoàn thành được ghi trực tiếp vào Amazon S3 Processed Media Bucket.
+10. **Cập nhật dữ liệu và trạng thái:** AWS Step Functions cập nhật trạng thái tệp tin và thông tin đường dẫn phát lại HLS vào bảng Amazon DynamoDB.
+11. **Phân phối nội dung tốc độ cao:** Người dùng truy cập và phát video HLS thông qua mạng phân phối nội dung Amazon CloudFront được bảo vệ bởi AWS WAF và cơ chế Origin Access Control (OAC).
+12. **Giám sát tập trung:** Toàn bộ nhật ký, chỉ số vận hành và cảnh báo sự cố từ API Gateway, Lambda, SQS, Step Functions, MediaConvert được thu thập tập trung về Amazon CloudWatch.
 
-### 4. Triển khai kỹ thuật  
-*Các giai đoạn triển khai*  
-Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây dựng nền tảng thời tiết — mỗi phần trải qua 4 giai đoạn:  
-1. *Nghiên cứu và vẽ kiến trúc*: Nghiên cứu Raspberry Pi với cảm biến ESP32 và thiết kế kiến trúc AWS Serverless (1 tháng trước kỳ thực tập).  
-2. *Tính toán chi phí và kiểm tra tính khả thi*: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh (Tháng 1).  
-3. *Điều chỉnh kiến trúc để tối ưu chi phí/giải pháp*: Tinh chỉnh (ví dụ tối ưu Lambda với Next.js) để đảm bảo hiệu quả (Tháng 2).  
-4. *Phát triển, kiểm thử, triển khai*: Lập trình Raspberry Pi, AWS services với CDK/SDK và ứng dụng Next.js, sau đó kiểm thử và đưa vào vận hành (Tháng 2–3).  
 
-*Yêu cầu kỹ thuật*  
-- *Trạm thời tiết biên*: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.  
-- *Nền tảng thời tiết*: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.  
+## Kiến trúc đề xuất
 
-### 5. Lộ trình & Mốc triển khai  
-- *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch và đánh giá trạm cũ.  
-- *Thực tập (Tháng 1–3)*:  
-    - Tháng 1: Học AWS và nâng cấp phần cứng.  
-    - Tháng 2: Thiết kế và điều chỉnh kiến trúc.  
-    - Tháng 3: Triển khai, kiểm thử, đưa vào sử dụng.  
-- *Sau triển khai*: Nghiên cứu thêm trong vòng 1 năm.  
+Kiến trúc hệ thống được thiết kế theo mô hình phân lớp rõ ràng nhằm giảm thiểu sự phụ thuộc lẫn nhau giữa các thành phần (decoupling), cho phép từng dịch vụ tự động mở rộng quy mô độc lập theo nhu cầu thực tế. Việc phân tách triệt để giữa luồng xử lý đồng bộ (xác thực, gọi API, sinh presigned URL) và luồng xử lý bất đồng bộ (tiếp nhận sự kiện, hàng đợi thông điệp, điều phối trạng thái và chuyển mã) góp phần nâng cao tính sẵn sàng của toàn hệ thống, tạo điều kiện thuận lợi cho công tác kiểm thử, cô lập sự cố và giám sát vận hành.
 
-### 6. Ước tính ngân sách  
-Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01)  
-Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).  
+![Kiến trúc đề xuất hệ thống Serverless Video-on-Demand Platform on AWS](/images/2-Proposal/VOD.drawio.png)  
+*Hình 2.1. Kiến trúc đề xuất của hệ thống Serverless Video-on-Demand Platform on AWS.*
 
-*Chi phí hạ tầng*  
-- AWS Lambda: 0,00 USD/tháng (1.000 request, 512 MB lưu trữ).  
-- S3 Standard: 0,15 USD/tháng (6 GB, 2.100 request, 1 GB quét).  
-- Truyền dữ liệu: 0,02 USD/tháng (1 GB vào, 1 GB ra).  
-- AWS Amplify: 0,35 USD/tháng (256 MB, request 500 ms).  
-- Amazon API Gateway: 0,01 USD/tháng (2.000 request).  
-- AWS Glue ETL Jobs: 0,02 USD/tháng (2 DPU).  
-- AWS Glue Crawlers: 0,07 USD/tháng (1 crawler).  
-- MQTT (IoT Core): 0,08 USD/tháng (5 thiết bị, 45.000 tin nhắn).  
 
-*Tổng*: 0,7 USD/tháng, 8,40 USD/12 tháng  
-- *Phần cứng*: 265 USD một lần (Raspberry Pi 5 và cảm biến).  
+## Mô tả kiến trúc đề xuất
 
-### 7. Đánh giá rủi ro  
-*Ma trận rủi ro*  
-- Mất mạng: Ảnh hưởng trung bình, xác suất trung bình.  
-- Hỏng cảm biến: Ảnh hưởng cao, xác suất thấp.  
-- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.  
+Hệ thống Serverless Video-on-Demand Platform on AWS được tổ chức thành 7 lớp chức năng chính:
 
-*Chiến lược giảm thiểu*  
-- Mạng: Lưu trữ cục bộ trên Raspberry Pi với Docker.  
-- Cảm biến: Kiểm tra định kỳ, dự phòng linh kiện.  
-- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.  
+- **Lớp định danh và truy cập (Identity & Access Layer):** Sử dụng Amazon Cognito để quản lý thông tin người dùng, cung cấp luồng đăng ký, đăng nhập và phát hành JWT Token nhằm bảo mật các truy cập vào tài nguyên hệ thống.
+- **Lớp biên và phân phối nội dung (Edge & Content Delivery Layer):** Gồm Amazon CloudFront kết hợp với AWS WAF và Amazon S3 Frontend Bucket. Giao diện Web được lưu trữ an toàn trong một S3 bucket riêng tư. CloudFront đóng vai trò phân phối các tệp tĩnh của giao diện và luồng video HLS đến người dùng với độ trễ thấp, đồng thời áp dụng Origin Access Control (OAC) để ngăn chặn truy cập trực tiếp từ Internet vào S3 origin. Tường lửa AWS WAF được gắn tại CloudFront để lọc các truy cập bất thường và chống tấn công lớp ứng dụng.
+- **Lớp ứng dụng (Application Layer):** Bao gồm Amazon API Gateway và các hàm AWS Lambda. API Gateway tiếp nhận các yêu cầu HTTP/REST từ người dùng, sử dụng JWT Authorizer để kiểm tra quyền hạn và định tuyến đến Lambda. AWS Lambda thực thi các logic nghiệp vụ ngắn hạn như sinh presigned URL tải lên S3 và truy vấn danh mục phim.
+- **Lớp dữ liệu (Data Layer):** Gồm Amazon DynamoDB, Amazon S3 Raw Upload Bucket và Amazon S3 Processed Media Bucket. DynamoDB lưu trữ metadata của phim, thông tin người dùng và trạng thái xử lý video. S3 Raw Upload Bucket chứa các video gốc do người dùng tải lên. S3 Processed Media Bucket lưu trữ kết quả đầu ra gồm các tệp HLS và thumbnail.
+- **Lớp xử lý sự kiện và điều phối (Event Processing Layer):** Bao gồm Amazon EventBridge, Amazon SQS (kèm SQS Dead-Letter Queue), Amazon EventBridge Pipes và AWS Step Functions. Khi có video mới tại S3 Raw Bucket, EventBridge tiếp nhận sự kiện và gửi đến SQS để xếp hàng chờ. SQS đóng vai trò vùng đệm chịu tải và chuyển các tin nhắn không xử lý được sang Dead-Letter Queue (DLQ). EventBridge Pipes đọc thông điệp từ SQS để khởi chạy AWS Step Functions State Machine - thành phần chịu trách nhiệm điều phối chi tiết các bước xử lý và cập nhật trạng thái video.
+- **Lớp xử lý truyền thông (Media Processing Layer):** Sử dụng AWS Elemental MediaConvert làm dịch vụ chuyển mã chuyên dụng. MediaConvert nhận tệp video nguồn từ S3 Raw Bucket theo lệnh từ Step Functions, tiến hành nén và phân tách thành các tệp HLS playlist (.m3u8), video segment (.ts) và ảnh đại diện (.jpg), sau đó xuất dữ liệu sang S3 Processed Bucket.
+- **Lớp giám sát (Monitoring Layer):** Sử dụng Amazon CloudWatch làm trung tâm thu thập nhật ký (Logs), chỉ số hiệu năng (Metrics) và thiết lập cảnh báo (Alarms) cho toàn bộ các dịch vụ API Gateway, Lambda, SQS, Step Functions và MediaConvert.
 
-*Kế hoạch dự phòng*  
-- Quay lại thu thập thủ công nếu AWS gặp sự cố.  
-- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.  
 
-### 8. Kết quả kỳ vọng  
-*Cải tiến kỹ thuật*: Dữ liệu và phân tích thời gian thực thay thế quy trình thủ công. Có thể mở rộng tới 10–15 trạm.  
-*Giá trị dài hạn*: Nền tảng dữ liệu 1 năm cho nghiên cứu AI, có thể tái sử dụng cho các dự án tương lai.
+## Kế hoạch triển khai
+
+Quy trình phát triển hệ thống Serverless Video-on-Demand Platform on AWS được chia thành các giai đoạn tuần tự:
+
+Giai đoạn đầu tập trung nghiên cứu chi tiết yêu cầu bài toán, thống nhất kiến trúc phân lớp và lựa chọn bộ dịch vụ AWS phù hợp. Tiếp theo, nhóm tiến hành xây dựng giao diện ứng dụng Web tĩnh, tích hợp xác thực người dùng bằng Amazon Cognito và thiết lập các API nghiệp vụ trên Amazon API Gateway kết hợp với AWS Lambda.
+
+Giai đoạn kế tiếp thực hiện thiết kế cấu trúc dữ liệu metadata trên Amazon DynamoDB và phát triển tính năng sinh presigned URL cho phép ứng dụng khách tải tệp video trực tiếp lên Amazon S3 Raw Upload Bucket. Sau khi luồng tải lên hoàn tất, nhóm tập trung xây dựng luồng xử lý sự kiện bất đồng bộ bao gồm việc cấu hình Amazon EventBridge, hàng đợi Amazon SQS, Dead-Letter Queue và Amazon EventBridge Pipes.
+
+Ở giai đoạn xử lý truyền thông, nhóm thiết kế quy trình điều phối trên AWS Step Functions và cấu hình các Job Template chuyển mã trên AWS Elemental MediaConvert để tạo định dạng HLS đa phân giải kèm thumbnail. Kết quả chuyển mã được lưu trữ tại Amazon S3 Processed Media Bucket và được cấu hình phân phối qua Amazon CloudFront CDN kết hợp cơ chế bảo vệ Origin Access Control (OAC) và tường lửa AWS WAF.
+
+Giai đoạn cuối cùng dành cho việc cấu hình hệ thống giám sát Amazon CloudWatch, thực hiện kiểm thử tích hợp toàn diện (end-to-end testing), đánh giá các chỉ số hiệu năng cùng chi phí vận hành thực tế, từ đó hoàn thiện bộ hồ sơ tài liệu báo cáo và chuẩn bị kịch bản nghiệm thu dự án.
+
+
+## Chi phí dự kiến
+
+Chi phí hạ tầng
+
+AWS Elemental MediaConvert: 22,50 USD/tháng (10 video, mỗi video 60 phút, đầu ra HLS 1080p, 720p và 480p).
+
+Amazon S3 Standard: 1,60 USD/tháng (63 GB lưu trữ video gốc, nội dung HLS, thumbnail và frontend).
+
+Amazon CloudFront và AWS WAF: 0,00 USD/tháng (dưới 100 GB dữ liệu truyền tải và dưới 1 triệu request).
+
+Amazon Cognito: 0,00 USD/tháng (100 người dùng hoạt động).
+
+Amazon API Gateway: 0,05 USD/tháng (50.000 request).
+
+AWS Lambda: 0,00 USD/tháng (100.000 request, bộ nhớ 512 MB).
+
+Amazon DynamoDB: 0,05 USD/tháng (50.000 lượt đọc và 10.000 lượt ghi metadata).
+
+Amazon EventBridge: 0,00 USD/tháng (1.000 sự kiện).
+
+Amazon SQS và Dead-Letter Queue: 0,00 USD/tháng (dưới 1 triệu request).
+
+Amazon EventBridge Pipes: 0,00 USD/tháng (1.000 thông điệp).
+
+AWS Step Functions: 0,00 USD/tháng (10 workflow và dưới 4.000 state transition).
+
+Amazon CloudWatch: 0,50 USD/tháng (1 GB log, dashboard và alarm cơ bản).
+
+Tổng: 24,70 USD/tháng, 296,40 USD/12 tháng.
+
+
+## Kết quả mong đợi
+
+Dựa trên thiết kế kiến trúc đề xuất, hệ thống Serverless Video-on-Demand Platform on AWS được kỳ vọng đạt được các kết quả kỹ thuật sau:
+
+- Cung cấp cơ chế xác thực và phân quyền người dùng an toàn thông qua Cognito và JWT Authorizer.
+- Hỗ trợ tải tệp video dung lượng lớn trực tiếp từ ứng dụng khách lên S3 Raw Bucket bằng presigned URL, giảm tải cho máy chủ ứng dụng.
+- Tự động hóa hoàn toàn luồng chuyển mã video nguồn sang chuẩn phát trực tuyến HLS đa phân giải kèm theo ảnh đại diện thumbnail.
+- Cho phép người dùng theo dõi trạng thái xử lý video bất đồng bộ theo thời gian thực dựa trên dữ liệu cập nhật tại DynamoDB.
+- Phân phối luồng video HLS với độ trễ thấp và trải nghiệm mượt mà tới trình duyệt người dùng nhờ hạ tầng CloudFront CDN.
+- Ghi nhận đầy đủ nhật ký vận hành và hỗ trợ phát hiện sớm các bất thường hệ thống thông qua CloudWatch.
+- Khả năng tự động mở rộng quy mô linh hoạt theo tải lượng người dùng mà không cần can thiệp quản trị thủ công.
+
+
+## Kết luận
+
+Bản đề xuất đã trình bày tổng quan giải pháp xây dựng hệ thống Serverless Video-on-Demand Platform on AWS nhằm giải quyết triệt để các thách thức về chi phí hạ tầng, khả năng mở rộng và hiệu năng xử lý truyền thông của mô hình máy chủ truyền thống. Bằng cách kết hợp linh hoạt các dịch vụ serverless được quản lý của AWS, kiến trúc đề xuất giúp phân tách hiệu quả giữa luồng xử lý tương tác đồng bộ và luồng chuyển mã bất đồng bộ, tạo nền tảng vững chắc cho quá trình phát triển hệ thống. Bản đề xuất này đóng vai trò là kim chỉ nam kỹ thuật quan trọng, định hướng cho các bước triển khai chi tiết, kiểm thử và đánh giá hiệu quả của dự án trong các giai đoạn tiếp theo.
