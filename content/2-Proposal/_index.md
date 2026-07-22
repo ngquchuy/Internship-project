@@ -49,7 +49,7 @@ The proposal builds a comprehensive Serverless Video-on-Demand Platform on AWS s
 
 The system architecture is designed with clear layer decoupling to minimize inter-component dependencies, enabling individual services to scale independently based on actual demand. The strict separation between synchronous workflows (authentication, API calls, presigned URL generation) and asynchronous processing (event ingestion, message queuing, workflow orchestration, transcoding) improves overall system availability, facilitating testing, fault isolation, and operational monitoring.
 
-![Proposed Architecture of Serverless Video-on-Demand Platform on AWS](/images/2-Proposal/VOD.drawio.png)  
+![Proposed Architecture of Serverless Video-on-Demand Platform on AWS](/images/2-Proposal/VOD.png)  
 *Figure 2.1. Proposed Architecture of Serverless Video-on-Demand Platform on AWS.*
 
 

@@ -49,7 +49,7 @@ Trong khuôn khổ hệ thống Video-on-Demand, việc tiếp nhận, xử lý 
 
 Kiến trúc hệ thống được thiết kế theo mô hình phân lớp rõ ràng nhằm giảm thiểu sự phụ thuộc lẫn nhau giữa các thành phần (decoupling), cho phép từng dịch vụ tự động mở rộng quy mô độc lập theo nhu cầu thực tế. Việc phân tách triệt để giữa luồng xử lý đồng bộ (xác thực, gọi API, sinh presigned URL) và luồng xử lý bất đồng bộ (tiếp nhận sự kiện, hàng đợi thông điệp, điều phối trạng thái và chuyển mã) góp phần nâng cao tính sẵn sàng của toàn hệ thống, tạo điều kiện thuận lợi cho công tác kiểm thử, cô lập sự cố và giám sát vận hành.
 
-![Kiến trúc đề xuất hệ thống Serverless Video-on-Demand Platform on AWS](/images/2-Proposal/VOD.drawio.png)  
+![Kiến trúc đề xuất hệ thống Serverless Video-on-Demand Platform on AWS](/images/2-Proposal/VOD.png)  
 *Hình 2.1. Kiến trúc đề xuất của hệ thống Serverless Video-on-Demand Platform on AWS.*
 
 
